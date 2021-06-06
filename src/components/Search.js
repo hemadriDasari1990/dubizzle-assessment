@@ -1,17 +1,53 @@
-import React from 'react'
-import styled from 'styled-components'
-import Octicon from 'react-octicon'
+import React, { useEffect, useState } from "react";
+import { getPublicGists, getPublicGistsByName } from "../redux/actions/gist";
+
+import Octicon from "react-octicon";
+import styled from "styled-components";
+import useDebounce from "./common/search";
+import { useDispatch } from "react-redux";
 
 const Search = () => {
+  /* React Local States */
+  const [queryString, setQueryString] = useState("");
+
+  /* Custom hooks */
+  const debouncedValue = useDebounce(queryString, 500);
+
+  /* Redux hooks */
+  const dispatch = useDispatch();
+
+  /* React hooks */
+  useEffect(() => {
+    if (debouncedValue) {
+      loadPublicGists(debouncedValue);
+    } else {
+      dispatch(getPublicGists());
+    }
+  }, [debouncedValue]);
+
+  /* Event Handler Functions */
+  const handleInput = (event) => {
+    event.preventDefault();
+    setQueryString(event.target.value);
+  };
+
+  const loadPublicGists = (searchValue) => {
+    dispatch(getPublicGistsByName(searchValue));
+  };
+
   return (
     <Wrapper>
       <InputBox>
-      <Octicon name="search" />
-      <Input placeholder="Search Gists for the username"/>
+        <Octicon name="search" />
+        <Input
+          placeholder="Search Gists for the username"
+          onChange={(e) => handleInput(e)}
+          value={queryString}
+        />
       </InputBox>
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   padding: 8px;
@@ -33,9 +69,9 @@ const Input = styled.input`
   width: 100%;
   font-size: 16px;
 
-  &:focus{
+  &:focus {
     outline: 0;
   }
 `;
 
-export default Search
+export default Search;
