@@ -20,7 +20,7 @@ const GistList = (props) => {
         </GistGrid>
       ));
     }
-    if (!loading && !Array.isArray(gistsList)) {
+    if (!loading) {
       return (
         <h1 id="no-records" className="center">
           No users found
@@ -41,6 +41,7 @@ const Container = styled.div`
   margin-right: auto;
   padding-left: 24px;
   padding-right: 24px;
+  padding-top: 24px;
   max-width: 700px;
 `;
 

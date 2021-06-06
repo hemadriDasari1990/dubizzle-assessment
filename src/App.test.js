@@ -24,7 +24,7 @@ test("should show loader when API is called", () => {
   expect(loaderElement).toBeInTheDocument();
 });
 
-test("Should render gist list component", () => {
+test("Should render gist list component 1", () => {
   render(
     <Provider store={store}>
       <Gist />
