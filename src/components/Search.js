@@ -19,7 +19,7 @@ const Search = () => {
   /* React hooks */
   useEffect(() => {
     if (debouncedValue) {
-      loadPublicGists(debouncedValue);
+      loadPublicGistsByName(debouncedValue);
     } else {
       dispatch(getPublicGists());
     }
@@ -31,7 +31,8 @@ const Search = () => {
     setQueryString(event.target.value);
   };
 
-  const loadPublicGists = (searchValue) => {
+  /* fetch public gists by user name */
+  const loadPublicGistsByName = (searchValue) => {
     dispatch(getPublicGistsByName(searchValue));
   };
 
