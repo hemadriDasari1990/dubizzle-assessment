@@ -79,13 +79,13 @@ const GistDetails = (props) => {
         <p>Last updated: {lastUpdated}</p>
       </Row>
       <span className="description">{gist.description}</span>
-      <Row>
+      <FilesWrapper>
         {Object.keys(gist.files).map((key, index) => (
-          <div className="mt-10 mb-40" key={`file-${index}`}>
+          <div className="mt-10" key={`file-${index}`}>
             <a
               href={gist.files[key].raw_url}
               target="_blank"
-              className="anchor-link  align-center"
+              className="anchor-link align-center"
             >
               <SvgFileNote color="#1976d2" />
               <span className="ml-10 mr-8 text-bottom">
@@ -94,7 +94,7 @@ const GistDetails = (props) => {
             </a>
           </div>
         ))}
-      </Row>
+      </FilesWrapper>
       <div>
         <Hr />
       </div>
@@ -113,6 +113,13 @@ const Wrapper = styled.div`
 
 const Hr = styled.div`
   border: 1px solid #b9b7b733;
+`;
+
+const FilesWrapper = styled.div`
+  flex-flow: row wrap;
+  display: flex;
+  max-width: 700px;
+  margin-bottom: 40px;
 `;
 
 GistDetails.propTypes = {

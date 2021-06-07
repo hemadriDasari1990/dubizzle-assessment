@@ -46,8 +46,9 @@ const Container = styled.div`
 `;
 
 const GistGrid = styled.div`
-  max-height: 220px;
+  max-height: 400px;
   width: 100%;
+  overflow-y: scroll;
 `;
 
 GistList.propTypes = {
